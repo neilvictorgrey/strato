@@ -3,8 +3,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, scoped_session
 
-from Types import MetaData
-
 class Connection(object):
     
     def __init__(self, type, location, port=None, dbName=None, username=None, password=None, echo=False):
@@ -19,7 +17,7 @@ class Connection(object):
 
         self.__createEngine()
         
-        self._metadata = MetaData(bind=self.getEngine())
+        self._metadata = sqlalchemy.MetaData(bind=self.getEngine())
         self.__session = None
     
     def __createEngine(self):

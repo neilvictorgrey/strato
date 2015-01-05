@@ -1,10 +1,8 @@
 import inspect
-import pprint
 
 from sqlalchemy.ext.declarative import DeferredReflection, declarative_base, declared_attr
-from sqlalchemy.orm import mapper
 
-from Types import Table, Column, Integer, MetaData
+from Types import Table, Column, Integer
 
 Base = declarative_base(cls=DeferredReflection)
 class StratoBase(Base):
