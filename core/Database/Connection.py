@@ -20,7 +20,7 @@ class Connection(object):
         self.__createEngine()
         
         self._metadata = MetaData(bind=self.getEngine())
-        self._session = None
+        self.__session = None
     
     def __createEngine(self):
         

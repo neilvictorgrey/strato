@@ -1,7 +1,5 @@
 from strato import EntityBase, datatypes, getConnection
 
-from sqlalchemy.orm import sessionmaker
-
 class User(EntityBase):
 
     def __init__(self, **kwargs):
@@ -26,8 +24,9 @@ StratoEngine = StratoConnection.getEngine()
 User.register(StratoConnection)
 User.prepare(StratoEngine)
 
-session = sessionmaker(bind=StratoEngine)()
+session = StratoConnection.getSession()
 user = User(username='neil', fullname='Neil Grey')
 session.add(user)
 session.commit()
 print user
+session.close()
