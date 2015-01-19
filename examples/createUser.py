@@ -7,26 +7,30 @@ class User(EntityBase):
         
     def __repr__(self):
         return "User({id}, {login}, {name})".format(
-                id=self.id, 
-                login=self.username, 
-                name=self.fullname
-            )
+            id=self.id, 
+            login=self.username, 
+            name=self.fullname
+        )
 
     @classmethod
     def register(cls, connection):
-        cls.addAttribute('username', datatypes.String(100))
-        cls.addAttribute('fullname', datatypes.String(100))
+        
+        cls.addParameter('username', datatypes.String(100))
+        cls.addParameter('fullname', datatypes.String(100))
         super(User, cls).register(connection)
 
-StratoConnection = getConnection('sqlite',':memory:', echo=True)
-StratoEngine = StratoConnection.getEngine()
 
-User.register(StratoConnection)
-User.prepare(StratoEngine)
-
-session = StratoConnection.getSession()
-user = User(username='neil', fullname='Neil Grey')
-session.add(user)
-session.commit()
-print user
-session.close()
+def createUser():
+    
+    #################
+    # TESTING ONLY  #
+    StratoConnection = getConnection('sqlite',':memory:', echo=True)
+    User.register(StratoConnection)
+    User.activate(StratoConnection)
+    # TESTING ONLY  #
+    #################
+    
+    user = User.create(username='neil', fullname='Neil Grey')
+    user.update(fullname='John Grey')
+    print user.fullname
+    

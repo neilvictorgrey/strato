@@ -5,9 +5,9 @@ from sqlalchemy.orm import sessionmaker, scoped_session
 
 class Connection(object):
     
-    def __init__(self, type, location, port=None, dbName=None, username=None, password=None, echo=False):
+    def __init__(self, dbType, location, port=None, dbName=None, username=None, password=None, echo=False):
         
-        self._type = type
+        self._dbType = dbType
         self._location = location
         self._port = port
         self._dbName = dbName
@@ -22,9 +22,9 @@ class Connection(object):
     
     def __createEngine(self):
         
-        assert self._type in self.getSupportedProtocols().keys()
+        assert self._dbType in self.getSupportedProtocols().keys()
         
-        if self._type == 'sqlite':
+        if self._dbType == 'sqlite':
             dbAddress = '{protocol}{location}'
         else:
             dbAddress = '{protocol}{username}:{password}@{location}'
@@ -34,7 +34,7 @@ class Connection(object):
                 dbAddress += '/{dbName}'
         
         uri = dbAddress.format(
-            protocol = self.getSupportedProtocols()[self._type],
+            protocol = self.getSupportedProtocols()[self._dbType],
             username = self._username,
             password = self._password,
             location = self._location,

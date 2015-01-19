@@ -2,7 +2,7 @@ import inspect
 
 from sqlalchemy.ext.declarative import DeferredReflection, declarative_base, declared_attr
 
-from Types import Table, Column, Integer
+from Types import Table, Column
 
 Base = declarative_base(cls=DeferredReflection)
 class StratoBase(Base):
@@ -19,8 +19,8 @@ class StratoBase(Base):
         return tablename
     
     @classmethod
-    def addAttribute(cls, name, type, **kwargs):
-        setattr(cls, name, Column(name, type, **kwargs))
+    def addParameter(cls, name, entityType, **kwargs):
+        setattr(cls, name, Column(name, entityType, **kwargs))
         
     # /todo: addAttributes method
     
