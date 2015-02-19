@@ -3,4 +3,4 @@ strato
 
 Entity-based data model based on SQLAlchemy
 
-...pre-pre-alpha... do not use...
+Currently in alpha -- this project is not currently considered a stable release candidate.
