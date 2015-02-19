@@ -1,5 +1,5 @@
-from core.Database.Types import Integer, Boolean
-from core.Database.StratoBase import StratoBase
+from strato.core.Database.Types import Integer, Boolean, DateTime
+from strato.core.Database.StratoBase import StratoBase
 
 class EntityBase(StratoBase):
     __abstract__ = True
@@ -17,7 +17,9 @@ class EntityBase(StratoBase):
         
         cls.addParameter('id', Integer, primary_key=True)
         cls.addParameter('version', Integer)
-        cls.addParameter('active', Boolean) 
+        cls.addParameter('active', Boolean)
+        cls.addParameter('lastEdited', DateTime)
+        cls.addParameter('lastEditedBy', Integer)
         super(EntityBase, cls).register(connection)
     
     @classmethod
